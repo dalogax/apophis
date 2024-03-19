@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>99942 Apophis</title>
-    <meta name="description" content="Explore the cosmic encounter with 99942 Apophis in 2029, a celestial event that promises to captivate the world. Learn about the asteroid, its close approach, and the scientific excitement it brings.">
+    <meta name="description"
+        content="Explore the cosmic encounter with 99942 Apophis in 2029, a celestial event that promises to captivate the world. Learn about the asteroid, its close approach, and the scientific excitement it brings.">
     <link rel="canonical" href="https://apophis.live">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="99942 Apophis: The Celestial Spectacle of 2029">
@@ -13,38 +15,153 @@
     <!-- <meta name="twitter:card" content="summary_large_image"> -->
     <style>
         body {
-            background-color: #111;
+            background-color: #000000;
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
         }
-        .container {
-            max-width: 800px;
+
+        #container {
+            max-width: 90vw;
             margin: auto;
         }
-        h1, p {
+
+        #visor {
+            height: 600px;
+        }
+
+        h1,
+        p {
             text-align: justify;
         }
+
         h1 {
             font-size: 2.5em;
             margin-bottom: 0.5em;
         }
+
         p {
             font-size: 1.2em;
             margin-bottom: 1em;
         }
+
+        #live {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+
+        button.selected {
+            background-color: white;
+            color: black;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+        #controls {
+            display: flex;
+            justify-content: right;
+        }
     </style>
+    <script>
+        window.onload = function () {
+            var buttons = document.querySelectorAll('button');
+            buttons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    buttons.forEach(function (btn) {
+                        btn.classList.remove('selected');
+                    });
+                    button.classList.add('selected');
+                });
+            });
+            document.getElementById('2029').addEventListener('click', function () {
+                document.getElementById('live').src = 'https://eyes.nasa.gov/apps/asteroids/#/99942_apophis?time=2029-04-13T19:13:33.282+00:00&rate=180';
+            });
+            document.getElementById('liveBtn').addEventListener('click', function () {
+                document.getElementById('live').src = 'https://eyes.nasa.gov/apps/asteroids/#/99942_apophis';
+            });
+
+            var targetTime = 1870767771 * 1000; // Convert to milliseconds
+
+            function updateH1() {
+                var currentTime = Date.now();
+                var remainingTime = targetTime - currentTime;
+
+                var seconds = Math.floor((remainingTime / 1000) % 60);
+                var minutes = Math.floor((remainingTime / 1000 / 60) % 60);
+                var hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
+                var years = Math.floor(remainingTime / (1000 * 60 * 60 * 24 * 365));
+                var days = Math.floor((remainingTime % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+
+                document.getElementById('countdown').textContent = years + "Y " + days + "D " + hours + "H " + minutes + "M " + seconds + "S ";
+            }
+
+            setInterval(updateH1, 1000);
+        }
+    </script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>99942 Apophis: The Celestial Spectacle of 2029</h1>
-        <p>In the shadow of the cosmos, a celestial giant stirs, awakening from the depths of space to make its mark on human history. Behold 99942 Apophis, an asteroid of epic proportions, embarking on a cosmic journey that will bring it daringly close to our home planet in the year 2029. This isn't just any space rock—it's a behemoth from the void, stretching over 370 meters across, ready to skim the Earth closer than some of our most advanced satellites. Picture it: a mountain floating in space, visible to the naked eye, a spectacle that has not graced our skies in recorded history.</p>
-        <p>April 13, 2029, will be a day unlike any other. Apophis will sweep past our world at a mere 31,000 kilometers away—so close that it will traverse the sky like a swiftly moving star, cutting through the heavens with its silent grace. Astronomers and stargazers alike will be offered a front-row seat to an event that has been millions of years in the making. It's a celestial rendezvous that promises to transform our understanding of the universe and our place within it.</p>
-        <p>But fear not, for this story is not one of doom but of wonder. Initial fears of a catastrophic impact have been dispelled, as scientists, with their vigilant eyes on the heavens, have calculated our safe passage through this cosmic dance. Instead of a harbinger of destruction, Apophis emerges as a beacon of scientific opportunity—a chance to unlock the secrets of these ancient travelers of the solar system.</p>
-        <p>The close encounter with Apophis will serve as a galactic milestone, offering unparalleled insights into the nature of asteroids and the origins of our solar system. It's a reminder of the fragile line we walk on Earth, amidst the vast and unpredictable theater of the universe. As Apophis glides by, it will leave behind a legacy of awe and a renewed curiosity in the hearts of humanity.</p>
-        <p>Prepare yourselves for 2029, a year that will be etched in the annals of space exploration and stargazing lore. The passage of Apophis will not just be an astronomical event; it will be a moment of unity, as eyes worldwide turn upward to witness the majesty of the cosmos. It's a cosmic ballet, with Earth and Apophis performing a once-in-a-lifetime pas de deux, reminding us of the endless wonders that lie just beyond our reach. The countdown to this monumental encounter has begun—are you ready to be part of the legend?</p>
+    <div id="container">
+        <div class="header">
+            <h1>99942 Apophis</h1>
+            <h1 id="countdown"></h1>
+        </div>
+        <div id="visor">
+            <iframe id="live" src="https://eyes.nasa.gov/apps/asteroids/#/99942_apophis" allow="fullscreen"></iframe>
+        </div>
+        <div id="controls">
+            <button id="2029">29 Apr 2029</button>
+            <button id="liveBtn" class="selected">Live</button>
+        </div>
+        <p>In the shadow of the cosmos, a celestial giant stirs, awakening from the depths of space to make its mark on
+            human history. Behold 99942 Apophis, an asteroid of epic proportions, embarking on a cosmic journey that
+            will bring it daringly close to our home planet in the year 2029. This isn't just any space rock—it's a
+            behemoth from the void, stretching over 370 meters across, ready to skim the Earth closer than some of our
+            most advanced satellites. Picture it: a mountain floating in space, visible to the naked eye, a spectacle
+            that has not graced our skies in recorded history.</p>
+        <p>April 13, 2029, will be a day unlike any other. Apophis will sweep past our world at a mere 31,000 kilometers
+            away—so close that it will traverse the sky like a swiftly moving star, cutting through the heavens with its
+            silent grace. Astronomers and stargazers alike will be offered a front-row seat to an event that has been
+            millions of years in the making. It's a celestial rendezvous that promises to transform our understanding of
+            the universe and our place within it.</p>
+        <p>But fear not, for this story is not one of doom but of wonder. Initial fears of a catastrophic impact have
+            been dispelled, as scientists, with their vigilant eyes on the heavens, have calculated our safe passage
+            through this cosmic dance. Instead of a harbinger of destruction, Apophis emerges as a beacon of scientific
+            opportunity—a chance to unlock the secrets of these ancient travelers of the solar system.</p>
+        <p>The close encounter with Apophis will serve as a galactic milestone, offering unparalleled insights into the
+            nature of asteroids and the origins of our solar system. It's a reminder of the fragile line we walk on
+            Earth, amidst the vast and unpredictable theater of the universe. As Apophis glides by, it will leave behind
+            a legacy of awe and a renewed curiosity in the hearts of humanity.</p>
+        <p>Prepare yourselves for 2029, a year that will be etched in the annals of space exploration and stargazing
+            lore. The passage of Apophis will not just be an astronomical event; it will be a moment of unity, as eyes
+            worldwide turn upward to witness the majesty of the cosmos. It's a cosmic ballet, with Earth and Apophis
+            performing a once-in-a-lifetime pas de deux, reminding us of the endless wonders that lie just beyond our
+            reach. The countdown to this monumental encounter has begun—are you ready to be part of the legend?</p>
     </div>
+
 </body>
+
 </html>
